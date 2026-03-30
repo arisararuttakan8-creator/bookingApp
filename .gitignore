@@ -1,0 +1,29 @@
+# Node modules (ทั้ง api และ client)
+node_modules/
+api/node_modules/
+client/node_modules/
+
+# environment variables (สำคัญมาก ห้ามหลุด)
+.env
+api/.env
+client/.env
+
+# logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# build files
+dist/
+build/
+api/dist/
+client/build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VS Code (แล้วแต่จะ ignore หรือไม่)
+.vscode/

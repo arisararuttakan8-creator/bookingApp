@@ -26,6 +26,11 @@ mongoose.connection.on("connected", ()=>{
 mongoose.connection.on("error", (err) => {
     console.log("MongoDB error:", err);
   });
+
+app.get('/', (req , res )=>{
+    res.send('hello first request!')
+})
+
 app.listen(8800,()=>{
     connect()
     console.log('connected to backend.')

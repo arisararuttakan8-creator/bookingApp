@@ -24,7 +24,6 @@ export const register = async ( req , res , next )=>{
 
 export const login = async ( req , res , next )=>{
     try{
-        console.log('working login controller')
         // find user
         const user = await User.findOne({userName:req.body.userName})
         if( !user ) return next( createError(404, "User not found!"))

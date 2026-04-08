@@ -3,7 +3,7 @@ import User from "../models/User.js"
 
 export const updateUser = async( req , res)=>{
     try{
-        const updatedUser = await User.findByIdAndUpdate( req.params.id , {$set:req.body} , {new:true})
+        const updatedUser = await User.findByIdAndUpdate( req.params.id , {$set:req.body} , {returnDocument: 'after'})
         res.status(200).send( updatedUser)
 
     }catch(err){

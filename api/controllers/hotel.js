@@ -15,7 +15,7 @@ export const  createHotel = async( req , res)=>{
 
 export const updateHotel = async( req , res)=>{
     try{
-        const updatedHotel = await Hotel.findByIdAndUpdate( req.params.id , {$set:req.body} , {new:true})
+        const updatedHotel = await Hotel.findByIdAndUpdate( req.params.id , {$set:req.body},{returnDocument: 'after'})
         res.status(200).send( updatedHotel)
 
     }catch(err){

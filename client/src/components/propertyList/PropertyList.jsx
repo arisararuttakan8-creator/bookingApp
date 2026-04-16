@@ -10,10 +10,7 @@ const PropertyList = () => {
     "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-villas_300/dd0d7f8202676306a661aa4f0cf1ffab31286211.jpg",
     "https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-chalet_300/8ee014fcc493cb3334e25893a1dee8c6d36ed0ba.jpg"
   ]
-  // console.log('loading : ',loading)
 
-  console.log('data : ',data)
-  //return <div></div>
   return (
     
     <div className="pList">

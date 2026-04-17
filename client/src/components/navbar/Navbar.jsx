@@ -9,7 +9,9 @@ const Navbar = () => {
         </Link>
         <div className="navItems">
           <button className="navButton">Register</button>
-          <button className="navButton">Login</button>
+          <Link to="/login">
+            <button className="navButton" >Login</button>
+          </Link>
         </div>
       </div>
     </div>

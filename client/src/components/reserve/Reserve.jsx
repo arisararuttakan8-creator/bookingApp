@@ -10,6 +10,21 @@ const Reserve = ({setOpen , hotelId})=>{
     const [ selectedRooms , setSelectedRooms ] = useState([])
     const {dates} = useContext(SearchContext)
 
+    const getDatesInRange = (startDate,endDate)=>{
+        const start = new Date(startDate)
+        const end = new Date(endDate)
+        const date = new Date(start)
+
+        let list = [];
+
+        while (date <= end) {
+            list.push( date.getTime());
+            date.setDate(date.getDate()+1);
+            
+        }
+        return list;
+    }
+    const alldates =  getDatesInRange(dates[0].startDate , dates[0].endDate);
     const handleSelect = (e)=>{
         const checked = e.target.checked
         const value = e.target.value;
@@ -19,7 +34,6 @@ const Reserve = ({setOpen , hotelId})=>{
             : selectedRooms.filter((item)=>item !== value )
         )
     } 
-    console.log('selectedRooms : ',selectedRooms)
 
     const handleClick = (e) => {
         e.preventDefault();
@@ -32,9 +46,9 @@ const Reserve = ({setOpen , hotelId})=>{
                     className="rClose" 
                     onClick={()=>setOpen(false)}/>
             </div>
-            <span >Select your rooms: </span>
+            <span key={data._id} >Select your rooms: </span>
             {data.map((item)=>(
-                <div className="rItem">
+                <div className="rItem" key={item._id}>
                     <div className="rItemInfo"> 
                         <div className="rTitle">{item.title}</div>
                         <div className="rDesc">{item.desc}</div>

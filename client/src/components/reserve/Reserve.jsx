@@ -4,8 +4,9 @@ import { faCircleXmark } from "@fortawesome/free-solid-svg-icons"
 import useFetch from "../../hooks/useFetch";
 import { useContext, useState } from "react";
 import { SearchContext } from "../../context/SearchContext";
+import axios from "axios";
 
-const Reserve = ({setOpen , hotelId})=>{
+const Reserve = ({setOpenModal , hotelId})=>{
     const { data , loading , error } = useFetch( `/hotels/rooms/${hotelId}`)
     const [ selectedRooms , setSelectedRooms ] = useState([])
     const {dates} = useContext(SearchContext)
@@ -28,10 +29,9 @@ const Reserve = ({setOpen , hotelId})=>{
 
     const isAvailable = ( roomNumber )=> {
         // check room 
-        const isFound = roomNumber.unavailableDates.some(( date )=>{
+        const isFound = roomNumber.unavailableDates.some(( date )=>
             alldates.includes( new Date(date).getTime() )
-        })
-
+        )
         return !isFound
     }
     const handleSelect = (e)=>{
@@ -44,8 +44,15 @@ const Reserve = ({setOpen , hotelId})=>{
         )
     } 
 
-    const handleClick = (e) => {
-        e.preventDefault();
+    const handleClick = async () => {
+        try {
+            await Promise.all(selectedRooms.map(roomId=>{
+                const res = axios.put(`/rooms/availability/${roomId}`, {dates:alldates})
+                return res.data
+            }))
+        } catch (error) {
+            
+        }
     }
     return (
         <div className="reserve">
@@ -53,7 +60,7 @@ const Reserve = ({setOpen , hotelId})=>{
                 <FontAwesomeIcon 
                     icon={faCircleXmark} 
                     className="rClose" 
-                    onClick={()=>setOpen(false)}/>
+                    onClick={()=>setOpenModal(false)}/>
             
             <span>Select your rooms: </span>
             {data.map((item)=>(

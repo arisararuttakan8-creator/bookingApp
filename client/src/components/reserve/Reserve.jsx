@@ -4,13 +4,15 @@ import { faCircleXmark } from "@fortawesome/free-solid-svg-icons"
 import useFetch from "../../hooks/useFetch";
 import { useContext, useState } from "react";
 import { SearchContext } from "../../context/SearchContext";
+import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 
 const Reserve = ({setOpenModal , hotelId})=>{
     const { data , loading , error } = useFetch( `/hotels/rooms/${hotelId}`)
     const [ selectedRooms , setSelectedRooms ] = useState([])
     const {dates} = useContext(SearchContext)
-
+    const navigate = useNavigate();
     const getDatesInRange = (startDate,endDate)=>{
         const start = new Date(startDate)
         const end = new Date(endDate)
@@ -50,6 +52,8 @@ const Reserve = ({setOpenModal , hotelId})=>{
                 const res = axios.put(`/rooms/availability/${roomId}`, {dates:alldates})
                 return res.data
             }))
+            setOpenModal(false)
+            navigate('/')
         } catch (error) {
             
         }

@@ -16,7 +16,7 @@ const New = ({ inputs, title }) => {
   
   const handleClick = async e =>{
     e.preventDefault();
-    const cloudName = 'dsvhekoyt'
+    const cloudName = process.env.REACT_APP_CLOUD_NAME
     const data = new FormData()
     data.append("file", file)
     data.append("upload_preset", "upload")
@@ -32,7 +32,6 @@ const New = ({ inputs, title }) => {
         ...info, 
         img: url
       }
-      console.log('newUser ' , newUser)
       await axios.post('/auth/register', newUser)
     } catch (error) {
       console.log(error)

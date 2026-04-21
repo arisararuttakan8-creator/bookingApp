@@ -37,36 +37,54 @@ export const userInputs = [
     },
   ];
   
-  export const productInputs = [
+  export const hotelInputs = [
     {
-      id: 1,
+      id: "name",
+      label: "name",
+      type: "text",
+      placeholder: "name",
+    },
+    {
+      id: "type",
+      label: "type",
+      type: "text",
+      placeholder: "type",
+    },
+    {
+      id: "city",
+      label: "city",
+      type: "text",
+      placeholder: "city",
+    },
+    {
+      id: "address",
+      label: "address",
+      type: "text",
+      placeholder: "address",
+    },
+    {
+      id: "distance",
+      label: "Distance from City Center",
+      type: "text",
+      placeholder: "distance",
+    },
+    {
+      id: "title",
       label: "Title",
       type: "text",
-      placeholder: "Apple Macbook Pro",
+      placeholder: "title",
     },
     {
-      id: 2,
+      id: "desc",
       label: "Description",
       type: "text",
-      placeholder: "Description",
+      placeholder: "description",
     },
     {
-      id: 3,
-      label: "Category",
-      type: "text",
-      placeholder: "Computers",
-    },
-    {
-      id: 4,
+      id: "cheapestPrice",
       label: "Price",
       type: "text",
-      placeholder: "100",
-    },
-    {
-      id: 5,
-      label: "Stock",
-      type: "text",
-      placeholder: "in stock",
+      placeholder: "Price",
     },
   ];
   

@@ -33,7 +33,10 @@ mongoose.connection.on("error", (err) => {
   });
 
 //middlewares
-app.use(cors())
+app.use(cors({
+    origin: "https://booking-app-gamma-pied.vercel.app",
+    credentials: true  // สำคัญมากสำหรับ cookie ค่ะ
+}))
 app.use(cookieParser())
 app.use(express.json())
 app.use('/api/auth',authRoute)

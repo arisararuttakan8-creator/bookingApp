@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import { SearchContext } from "../../context/SearchContext";
 import { useNavigate } from "react-router-dom";
 
-import axios from "axios";
+import axios from "../../utils/axios";
 
 const Reserve = ({setOpenModal , hotelId})=>{
     const { data } = useFetch( `/hotels/rooms/${hotelId}`)

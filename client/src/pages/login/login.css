@@ -1,55 +1,32 @@
+.login {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .lContainer {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .lWrapper {
-    width: 100%;
-    max-width: 1024px;
-    display: flex;
-    gap: 20px;
-  }
-  
-  .lSearch {
-    flex: 1;
-    background-color: #febb02;
-    padding: 10px;
-    border-radius: 10px;
-    position: sticky;
-    top: 10px;
-    height: max-content;
-  }
-  
-  .lTitle{
-    font-size: 20px;
-    color: #555;
-    margin-bottom: 10px;
-  }
-  
-  .lItem{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-bottom: 10px;
-  }
-  
-  .lItem>label{
-    font-size: 12px;
-  }
-  
-  .lItem>input{
-    height: 30px;
-    border: none;
-    padding: 5px;
-  }
-  .lItem>span{
-    height: 30px;
-    padding: 5px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
-  
-  
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lInput{
+  height: 30px;
+  padding: 10px;
+}
+
+.lButton {
+  border: none;
+  padding: 10px 20px;
+  background-color: #0071c2;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.lButton:disabled{
+  background-color: #0071c28c;
+  cursor: not-allowed;
+}

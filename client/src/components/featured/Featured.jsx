@@ -16,7 +16,7 @@ const Featured = () => {
       </div>
       
       <div className="featuredItem">
-        <img src="/images/madrid.jpeg" alt="madrid" className="featuredImg"/>
+        <img src="/images/madrid.jpg" alt="madrid" className="featuredImg"/>
         
         <div className="featuredTitles">
           <h1>Madrid</h1>
@@ -24,7 +24,7 @@ const Featured = () => {
         </div>
       </div>
       <div className="featuredItem">
-      <img src="/images/london.jpeg" alt="london" className="featuredImg"/>
+      <img src="/images/london.jpg" alt="london" className="featuredImg"/>
         <div className="featuredTitles">
           <h1>London</h1>
           <h2>{data[2]} properties</h2>

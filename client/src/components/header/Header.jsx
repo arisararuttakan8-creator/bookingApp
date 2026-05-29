@@ -18,22 +18,23 @@ import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 
 const Header = ({ type }) => {
-  const [destination, setDestination] = useState("");
-  const [openDate, setOpenDate] = useState(false);
-  const [dates, setDates] = useState([
-    {
+ // ดึงค่าจาก context 
+ const { city, dates: ctxDates, options: ctxOptions, dispatch } = useContext(SearchContext)
+    
+ // ใช้ค่าจาก context เป็น default 
+ const [destination, setDestination] = useState(city || "")
+ const [openDate, setOpenDate] = useState(false);
+ const [dates, setDates] = useState(
+  ctxDates?.length > 0 ? ctxDates : [{
       startDate: new Date(),
       endDate: new Date(),
-      key: "selection",
-    },
-  ]);
-  const [openOptions, setOpenOptions] = useState(false);
-  const [options, setOptions] = useState({
-    adult: 1,
-    children: 0,
-    room: 1,
-  });
-
+      key: "selection"
+  }]
+)
+ const [openOptions, setOpenOptions] = useState(false);
+ const [options, setOptions] = useState(
+  ctxOptions?.adult ? ctxOptions : { adult: 1, children: 0, room: 1 }
+)
   const navigate = useNavigate();
   const {user} = useContext(AuthContext)
 
@@ -47,18 +48,21 @@ const Header = ({ type }) => {
   };
 
 
-  const {dispatch} = useContext(SearchContext)
-
   const handleSearch = () => {
-    dispatch({type:"NEW_SEARCH",payload:{destination , dates , options}})
-    navigate("/hotels", { state: { destination, dates, options } });
-  };
+    // อัพเดท context
+    dispatch({ type: "NEW_SEARCH", payload: { city: destination, dates, options } })
+    
+    // navigate เฉพาะหน้า home 
+    if (type !== "list" && type !== "hotel") {
+      navigate("/hotels");
+    }
+  }
 
   return (
     <div className="header">
       <div
         className={
-          type === "list" ? "headerContainer listMode" : "headerContainer"
+          ( type === "list" || type === "hotel") ? "headerContainer listMode" : "headerContainer"
         }
       >
         <div className="headerList">
@@ -83,8 +87,10 @@ const Header = ({ type }) => {
             <span>Airport taxis</span>
           </div>
         </div>
-        {type !== "list" && (
+        
           <>
+          {(type !== "hotel" && type !== "list") && (
+            <>
             <h1 className="headerTitle">
               A lifetime of discounts? It's Genius.
             </h1>
@@ -92,8 +98,13 @@ const Header = ({ type }) => {
               Get rewarded for your travels – unlock instant savings of 10% or
               more with a free Lamabooking account
             </p>
+            </>
+          )}
+
           {  !user && <button className="headerBtn">Sign in / Register</button>}
             <div className="headerSearch">
+            {type !== "hotel" && (
+
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faBed} className="headerIcon" />
                 <input
@@ -101,8 +112,10 @@ const Header = ({ type }) => {
                   placeholder="Where are you going?"
                   className="headerSearchInput"
                   onChange={(e) => setDestination(e.target.value)}
+                  value={destination}
                 />
               </div>
+            )}
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
                 <span
@@ -204,7 +217,7 @@ const Header = ({ type }) => {
               </div>
             </div>
           </>
-        )}
+    
       </div>
     </div>
   );

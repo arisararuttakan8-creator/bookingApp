@@ -53,6 +53,7 @@ const Reserve = ({setOpenModal , hotelId})=>{
                 return res.data
             }))
             setOpenModal(false)
+            alert('Thank you for your reservation!')
             navigate('/')
         } catch (error) {
             
@@ -78,7 +79,7 @@ const Reserve = ({setOpenModal , hotelId})=>{
                     <div className="rSelectrooms">
                         {item.roomNumbers.map((roomNumber)=>
                             (
-                                <div className="room">
+                                <div key={roomNumber._id} className="room">
                                     <label>{roomNumber.number}</label>
                                     <input 
                                         type="checkbox" 

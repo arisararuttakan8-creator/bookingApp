@@ -1,5 +1,4 @@
 import "./hotel.css";
-import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
 import MailList from "../../components/mailList/MailList";
 import Footer from "../../components/footer/Footer";
@@ -16,6 +15,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 import { AuthContext } from "../../context/AuthContext";
 import Reserve from "../../components/reserve/Reserve";
+import Navbar from "../../components/navbar/Navbar";
 
 const Hotel = () => {
   const location = useLocation()
@@ -38,7 +38,10 @@ const Hotel = () => {
     const diffDays = Math.ceil(timeDiff/MILLISECONDE_PER_DAY)
     return diffDays
   }
-  const days =  dayDifference(dates[0].endDate , dates[0].startDate)
+  let days = 0
+  if(dates.length > 0){
+     days =  dayDifference(dates[0].endDate , dates[0].startDate)
+  }
 
   const handleOpen = (i) => {
     setSlideNumber(i);
@@ -59,6 +62,17 @@ const Hotel = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
+    if( dates.length < 1 ){
+      alert('Please select check-in and check-out dates.')
+      return
+    } else {
+      const days =  dayDifference(dates[0].endDate , dates[0].startDate)
+      if( days < 1){
+        alert('Please select check-in and check-out dates.')
+        return
+      }
+    }
+    
     
     if( user ){
 
@@ -72,8 +86,8 @@ const Hotel = () => {
 
   return (
     <div>
-      <Navbar />
-      <Header type="list" />
+      <Navbar/>
+      <Header type="hotel" />
       { loading ? 'loading' : 
       <div className="hotelContainer">
         {open && (
@@ -139,7 +153,7 @@ const Hotel = () => {
               <h2>
                 <b>${days * data.cheapestPrice * options.room}</b> ({days} nights)
               </h2>
-              <button>Reserve or Book Now!</button>
+              <button onClick={handleClick}>Reserve or Book Now!</button>
             </div>
           </div>
         </div>

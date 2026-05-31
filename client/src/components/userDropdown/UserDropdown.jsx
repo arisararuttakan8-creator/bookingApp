@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom"
 import "./userDropdown.css"
 
 const UserDropdown = ({ user, dispatch }) => {
-    console.log('user : ' , user)
     const [showMenu, setShowMenu] = useState(false)
     const navigate = useNavigate()
 
